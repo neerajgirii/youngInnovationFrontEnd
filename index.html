@@ -76,34 +76,27 @@
                   <div class="dropdown-header-navigation-tri">
                     <div class="button" id="dropdown-button">
                       <div class="button-base">
-                        <a href="#" style="text-decoration: none; color: white;" class="text">Resources</a>
-                        <img class="search-icon" alt="" src="./public/chevrondown.svg" />
-                      </div>
-                    </div>
-                    <div class="dropdown-header-navigation-sub" id="dropdown-menu">
-                      <div class="content17">
-                        <div class="nav-menu-item">
-                          <img class="book-icon" alt="" src="./public/book.svg" />
-                          <div class="text-and-supporting-text">
-                            <div class="text-and-badge">
-                              <div class="text16">Blog</div>
-                            </div>
-                            <div class="the-latest-industry">
-                              The latest industry news, updates and info.
-                            </div>
+                        <div class="dropdown">
+                          <a href="#" style="text-decoration: none; color: white;" class="text">Resources
+                              <img class="search-icon" alt="" src="./public/chevrondown.svg" style="top: 5px;"/>
+                          </a>
+                          <div class="dropdown-content">
+                              <!-- Add your dropdown content here -->
+                              <a href="#">Item 1</a><br>
+                              <a href="#">Item 2</a><br>
+                              <a href="#">Item 3</a>
                           </div>
-                        </div>
-                        <!-- Add more menu items here -->
+                      </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 
               </div>
-              <div class="input-with-label">
-                <div class="input">
-                  <div class="content">
-                    <img class="search-icon" alt="" src="./public/search.svg" />
+              <div class="input-with-label15" id="inputWithLabel">
+                <div class="input27">
+                  <div class="navigation13">
+                    <img class="chevron-down-icon15" alt="" src="./public/search.svg">
                   </div>
                 </div>
               </div>
@@ -799,6 +792,19 @@
         </div>
       </div>
     </div>
+
+    <div id="commandBarContainer" class="popup-overlay" style="display: none">
+      <div class="command-bar">
+        <div class="command-input">
+          <img class="search-lg-icon" alt="" src="./public/searchlg.svg" />
+
+          <div class="text5">Search</div>
+          <img class="help-icon" alt="" src="./public/help-icon.svg" />
+        </div>
+        <img class="command-bar-child" alt="" src="./public/frame-39483.svg" />
+      </div>
+    </div>
+    
     <script>
       // Function to scroll to the top of the page
           function scrollToTop() {
@@ -814,28 +820,32 @@
               scrollButton.style.display = 'none';
             }
           });
-// Get references to the dropdown button and menu
-const dropdownButton = document.getElementById('dropdown-button');
-const dropdownMenu = document.getElementById('dropdown-menu');
 
-// Add a click event listener to toggle the menu
-dropdownButton.addEventListener('click', function() {
-  if (dropdownMenu.style.display === 'block') {
-    // Hide the menu if it's currently visible
-    dropdownMenu.style.display = 'none';
-  } else {
-    // Show the menu if it's currently hidden
-    dropdownMenu.style.display = 'block';
-  }
-});
-
-// Close the menu when clicking outside of it
-document.addEventListener('click', function(event) {
-  if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-    dropdownMenu.style.display = 'none';
-  }
-});
-
+          var inputWithLabel = document.getElementById("inputWithLabel");
+      if (inputWithLabel) {
+        inputWithLabel.addEventListener("click", function () {
+          var popup = document.getElementById("commandBarContainer");
+          if (!popup) return;
+          var popupStyle = popup.style;
+          if (popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+      
+          var onClick =
+            popup.onClick ||
+            function (e) {
+              if (e.target === popup && popup.hasAttribute("closable")) {
+                popupStyle.display = "none";
+              }
+            };
+          popup.addEventListener("click", onClick);
+        });
+      }
     </script>
   </body>
   
